@@ -5,7 +5,7 @@
 - [wasm-pack](https://rustwasm.github.io/docs/wasm-pack/introduction.html)
 - [webpack](https://webpack.js.org/)
 - [Rust から WebAssembly にコンパイルする](https://developer.mozilla.org/ja/docs/WebAssembly/Rust_to_wasm)
-  - webpack 4 系を前提で書かれているので 5 系に脳内変換するとうごきました。
+  - webpack 4 系を前提で書かれているので注意。
 
 ## うごかし方
 
@@ -27,13 +27,13 @@ make dev
 
 - `wasm-pack new helloworld` で `helloworld/` 配下にファイルが生成されるので必要なものだけ取り入れる。
 
-### ビルドしてみる
+### wasm-pack でビルドしてみる
 
-- `wasm-pack build` を実行すると `pkg/` 配下に `.wasm` や `.js` が生成される。
+- `wasm-pack build` を実行すると `pkg/` 配下にビルド後のファイルが生成される。
 
 ### webpack のインストールとセットアップ
 
-- なくても動かせるが手元の環境が wsl2 で http サーバ経由で動かせた方が都合が良かったので webpack-dev-server をつかった。
+- なくても動かせるはずだが、手元の環境が wsl2 で http サーバ経由で動かせた方が都合が良かったので webpack-dev-server を使った。
 
 ```bash
 echo '{"private": true}' > package.json
@@ -44,16 +44,16 @@ npm i -D webpack webpack-cli webpack-dev-server
   - webpack で wasm を動かすには experimantal な設定が必要らしい
     - https://github.com/rustwasm/wasm-pack/issues/835#issuecomment-772591665
 
-- webpack のエントリーポイントになる `index.js` を用意する。
+- webpack のエントリーポイントになる `index.js` を用意して出力された wasm のラッパーを import して使うコードを書いた。
 
 ### webpack-dev-server から動かす
 
-`npx webpack serve --open` でブラウザが開き `Hello, helloworld!` という alert が出てきた。
+- `npx webpack serve --open` でブラウザが開くと wasm 側の alert() が実行された。
 
 ### wasm 側で引数を取るように変更
 
-`fn greet() -> void` を `fn greet(name: &str) -> void` にして挨拶する相手の名前を入力できるようにした。
-js 側の引数がなかったり string 型でないと動かないようになっていた。
+- `fn greet() -> void` を `fn greet(name: &str) -> void` にして挨拶する相手の名前を入力できるようにした。
+- js 側の引数がなかったり string 型でないと動かないようになっていた。
 
 ```
 helloworld_bg.js:69 Uncaught (in promise) Error: expected a string argument
@@ -64,5 +64,5 @@ helloworld_bg.js:69 Uncaught (in promise) Error: expected a string argument
 
 ### wasm 側で引数を取るように変更
 
-`fn greet(name: &str) -> String` にして js 側で alert() することができた。
-ちなみに `#[wasm_bindgen]` マクロがついている関数では lifetime が指定できないようになっているみたいで `&str` を戻り値に指定するとビルドができなかった。
+- `fn greet(name: &str) -> String` にして js 側で alert() することができた。
+- ちなみに `#[wasm_bindgen]` マクロがついている関数ではライフタイムが指定できないようになっているみたいで `&str` を戻り値に指定するとビルドができなかった。
