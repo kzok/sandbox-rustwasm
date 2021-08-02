@@ -1,4 +1,3 @@
-const js = import("./pkg/helloworld.js");
-js.then(js => {
-  js.greet("WebAssembly");
-});
+import * as wasm from "./pkg/helloworld.js";
+
+wasm.greet();
