@@ -66,3 +66,8 @@ helloworld_bg.js:69 Uncaught (in promise) Error: expected a string argument
     at Module.greet (helloworld_bg.js:110)
     at eval (index.js:8)
 ```
+
+### wasm 側で引数を取るように変更
+
+`fn greet(name: &str) -> String` にして js 側で alert() することができた。
+ちなみに `#[wasm_bindgen]` マクロがついている関数では lifetime が指定できないようになっているみたいで `&str` を戻り値に指定するとビルドができなかった。

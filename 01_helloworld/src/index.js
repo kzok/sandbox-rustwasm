@@ -1,3 +1,3 @@
 import * as wasm from "../cargo/pkg/helloworld.js";
 
-wasm.greet("WebAssembly");
+alert(wasm.greet("WebAssembly"));
