@@ -18,8 +18,8 @@ wasm-pack build cargo --dev
 
 npm ci
 
-# webpack-dev-server を立ち上げる
-npm run serve
+# webpack-dev-server とブラウザを立ち上げる
+npm run dev
 ```
 
 ## やったこと

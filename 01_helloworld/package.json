@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "serve": "webpack serve --open"
+    "dev": "webpack serve --open"
   },
   "devDependencies": {
     "webpack": "^5.48.0",
