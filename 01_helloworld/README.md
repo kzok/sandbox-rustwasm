@@ -13,13 +13,8 @@
 # wasm-pack のインストール
 curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
 
-# wasm-pack でビルド
-wasm-pack build cargo --dev
-
-npm ci
-
-# webpack-dev-server とブラウザを立ち上げる
-npm run dev
+# wasm-pack でビルドしてから webpack-dev-server とブラウザを立ち上げる
+make dev
 ```
 
 ## やったこと
