@@ -53,4 +53,16 @@ npm i -D webpack webpack-cli webpack-dev-server
 
 ### webpack-dev-server から動かす
 
-`npx webpack serve --open` でブラウザが開き `Hello, helloworld!` という alert が出てくる。
+`npx webpack serve --open` でブラウザが開き `Hello, helloworld!` という alert が出てきた。
+
+### wasm 側で引数を取るように変更
+
+`fn greet() -> void` を `fn greet(name: &str) -> void` にして挨拶する相手の名前を入力できるようにした。
+js 側の引数がなかったり string 型でないと動かないようになっていた。
+
+```
+helloworld_bg.js:69 Uncaught (in promise) Error: expected a string argument
+    at passStringToWasm0 (helloworld_bg.js:69)
+    at Module.greet (helloworld_bg.js:110)
+    at eval (index.js:8)
+```
