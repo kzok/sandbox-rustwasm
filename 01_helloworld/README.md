@@ -7,6 +7,21 @@
 - [Rust から WebAssembly にコンパイルする](https://developer.mozilla.org/ja/docs/WebAssembly/Rust_to_wasm)
   - webpack 4 系を前提で書かれているので 5 系に脳内変換するとうごきました。
 
+## うごかし方
+
+```bash
+# wasm-pack のインストール
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+# wasm-pack でビルド
+wasm-pack build cargo --dev
+
+npm ci
+
+# webpack-dev-server を立ち上げる
+npm run serve
+```
+
 ## やったこと
 
 ### wasm-pack のインストール
