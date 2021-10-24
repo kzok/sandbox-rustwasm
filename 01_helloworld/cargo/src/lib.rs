@@ -15,3 +15,14 @@ extern "C" {
 pub fn greet(name: &str) -> String {
     return format!("Hello, {}!", name);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_greeting() {
+        assert_eq!(greet("foo"), "Hello, foo!");
+        assert_eq!(greet("bar"), "Hello, bar!");
+    }
+}
