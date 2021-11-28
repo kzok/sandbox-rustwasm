@@ -1,5 +1,11 @@
 {
   "private": true,
+  "scripts": {
+    "lint": "run-p lint:*",
+    "lint:prettier": "prettier --check .",
+    "fmt": "run-s fmt:prettier",
+    "fmt:prettier": "npm run lint:prettier -- --write"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",
