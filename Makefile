@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-CARGO_MANIFEST_PATHS := $(shell git ls-files **/Cargo.toml)
+CARGO_MANIFEST_PATHS := $(shell git ls-files "**/Cargo.toml")
 
 # tasks
 
@@ -12,3 +12,9 @@ help:
 .PHONY: fmt ## Run cargo fmt
 fmt:
 	@for path in "$(CARGO_MANIFEST_PATHS)"; do cargo fmt --manifest-path $$path ; done
+
+# deps
+
+node_modules: package-lock.json
+	npm ci
+	touch node_modules
