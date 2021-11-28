@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -9,14 +9,14 @@ module.exports = {
   mode: "development",
   module: {
     rules: [
-      {test: /\.wasm$/,type: "webassembly/async"},
+      { test: /\.wasm$/, type: "webassembly/async" },
       { test: /\.tsx?$/, loader: "ts-loader" },
-    ]
+    ],
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js"]
+    extensions: [".ts", ".tsx", ".js"],
   },
   experiments: {
-    asyncWebAssembly: true, 
+    asyncWebAssembly: true,
   },
 };
